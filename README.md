@@ -19,58 +19,58 @@ projet_velib_etl/
 
 ---
 
-## 1. Installation des dépendances
+## ⚙️ Prérequis
 
-Créer un environnement virtuel et installer les packages requis :
+- Python 3.9+
+- Modules nécessaires :
 
 ```bash
-pip install streamlit pandas plotly folium pymongo streamlit-folium
+pip install streamlit pandas folium plotly streamlit-folium
 ```
 
 ---
 
-## 2. Lancement du dashboard
+## ▶️ Lancement de l'application
+
+Depuis la racine du projet, exécuter :
 
 ```bash
 streamlit run scripts/dashboard.py
 ```
 
-L'application :
-- Télécharge automatiquement les dernières données Vélib
-- Transforme et sauvegarde les données nettoyées
-- Affiche un dashboard interactif
-- Inclut une carte Folium avec lien Street View
-- Propose des filtres et des graphiques dynamiques
-- Permet de télécharger un export CSV filtré
+---
+
+## 🔄 Fonctionnement du pipeline
+
+1. **extract.py** : Récupère les dernières données Vélib via l’API Open Data
+2. **transform.py** : Nettoie les données et les transforme en DataFrame + CSV
+3. **dashboard.py** : 
+   - Rafraîchit automatiquement les données (ETL)
+   - Affiche une carte avec filtre
+   - Donne accès à des analyses simples et un export CSV
 
 ---
 
-## 3. Utilisation de MongoDB (script `load.py`)
+## 📊 Fonctions clés
 
-```python
-from pymongo import MongoClient
-import pandas as pd
-import os
-
-def charger_dans_mongodb():
-    client = MongoClient("mongodb://localhost:27017/")
-    db = client["velib_db"]
-    collection = db["stations_velib"]
-
-    chemin = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "velib_clean.csv"))
-    df = pd.read_csv(chemin)
-    collection.delete_many({})
-    collection.insert_many(df.to_dict(orient="records"))
-    print(f"Insertion réussie de {len(df)} documents.")
-
-if __name__ == "__main__":
-    charger_dans_mongodb()
-```
-
-> Utiliser ce script pour insérer les données dans une base NoSQL si besoin d’une persistance ou d’un accès externe à la base.
+- Carte Folium avec code couleur selon statut
+- Filtrage par nom ou statut (OPEN / CLOSED)
+- Street View par station (intégré dans la popup)
+- Graphiques : répartition vélos électriques vs mécaniques
+- Top 10 stations avec le plus de vélos disponibles
+- Statistiques par statut
+- Export CSV des données filtrées
 
 ---
 
-## Auteur
+## 🧠 Remarques
 
-Projet réalisé par **Imad Boumelik** – M2 Big Data –
+- L’ETL est relancé à chaque lancement de l'application → quasi temps réel
+- Possibilité d'étendre à MongoDB ou Spark pour traitement à grande échelle
+- L'application est pensée pour être claire, légère, et directement exploitable
+
+---
+
+## 👨‍💻 Réalisé par
+
+Imad Boumelik – M2 Big Data – 
