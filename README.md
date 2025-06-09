@@ -19,7 +19,7 @@ projet_velib_etl/
 
 ---
 
-## ⚙️ Prérequis
+## Prérequis
 
 - Python 3.9+
 - Modules nécessaires :
@@ -30,7 +30,7 @@ pip install streamlit pandas folium plotly streamlit-folium
 
 ---
 
-## ▶️ Lancement de l'application
+## ▶Lancement de l'application
 
 Depuis la racine du projet, exécuter :
 
@@ -40,7 +40,7 @@ streamlit run scripts/dashboard.py
 
 ---
 
-## 🔄 Fonctionnement du pipeline
+## Fonctionnement du pipeline
 
 1. **extract.py** : Récupère les dernières données Vélib via l’API Open Data
 2. **transform.py** : Nettoie les données et les transforme en DataFrame + CSV
@@ -51,7 +51,7 @@ streamlit run scripts/dashboard.py
 
 ---
 
-## 📊 Fonctions clés
+## Fonctions clés
 
 - Carte Folium avec code couleur selon statut
 - Filtrage par nom ou statut (OPEN / CLOSED)
@@ -63,14 +63,11 @@ streamlit run scripts/dashboard.py
 
 ---
 
-## 🧠 Remarques
+## Remarques
 
 - L’ETL est relancé à chaque lancement de l'application → quasi temps réel
-- Possibilité d'étendre à MongoDB ou Spark pour traitement à grande échelle
-- L'application est pensée pour être claire, légère, et directement exploitable
-
 ---
 
-## 👨‍💻 Réalisé par
+## Réalisé par
 
 Imad Boumelik – M2 Big Data – 
